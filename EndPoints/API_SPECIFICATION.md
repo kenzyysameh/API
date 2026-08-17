@@ -80,7 +80,7 @@ GET /api/v1/products/42/reviews
 
 Response : Json:
 200:{
-    "reviews":[ 
+    "data":[ 
         { 
     id : 1
     user : "user_1"
