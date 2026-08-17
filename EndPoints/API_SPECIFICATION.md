@@ -2,11 +2,11 @@ Action list products)
 GET /api/v1/products
 
 (Query parameter)
-Category = category_name
+category = category_name
 
 Response : Json :
 200: {
-    [
+    "data": [
         {
             id : 123,
             name:" product_1 ",
@@ -14,6 +14,8 @@ Response : Json :
             price: 1500,
             category:"electronics",
             stock: 10
+    ]
+
         }
    
 }
@@ -37,8 +39,12 @@ Response :Json:
  201: 
  Location: /api/v1/products/123
  {
-      {
- "price": 1700
+ id :123
+ name: "Wireless Headphones",
+ description: "Bluetooth headphones",
+ price: 1500,
+ category: "electronics",
+ stock: 20
 }
 ======================================    
 Action update a product)
@@ -48,7 +54,7 @@ Authentication: Required
 Authorization : Bearer <jwt_token>
 Access : Admin only
 
-Updated fields :
+Updatable fields :
 price 
 stock
 
@@ -141,7 +147,7 @@ Location api/v1/user/10/orders/2
  "quantity": 1
  }
  ],
-    total price :2000,
+    total_price :2000,
     status :"loading order"
 }
 ==========================================
