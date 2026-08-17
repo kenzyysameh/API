@@ -14,9 +14,10 @@ Response : Json :
             price: 1500,
             category:"electronics",
             stock: 10
+        }
     ]
 
-        }
+        
    
 }
 =====================================
@@ -60,7 +61,7 @@ stock
 
 Request : Json:
 {
- "price": 1700
+ "price": 1800
 }
 
 Response : Json :
@@ -79,11 +80,15 @@ GET /api/v1/products/42/reviews
 
 Response : Json:
 200:{
+    "reviews":[ 
+        { 
     id : 1
     user : "user_1"
     rating : 4
     comment :"very good "
     creation_date : 24/11/2006
+        }
+    ]
 }
 =========================================
 Action create a product review )
