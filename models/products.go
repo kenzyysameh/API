@@ -9,6 +9,11 @@ type Product struct {
 	Stock       int     `json:"stock"`
 }
 
+type ProductUpdateReq struct {
+	Price *float64 `json:"price"`
+	Stock *int     `json:"stock"`
+}
+
 var ProductsData = []Product{
 	{
 		Id:          1,
