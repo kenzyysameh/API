@@ -1,42 +1,6 @@
-/*
 package handlers
 
 import (
-
-	"net/http"
-
-	"github.com/gin-gonic/gin"
-
-)
-
-	func AuthenMiddleWare(c *gin.Context) {
-		token := c.GetHeader("Authentication")
-		if token == "" {
-			c.JSON(http.StatusUnauthorized, gin.H{
-				"error": "Unauthorized",
-			})
-			c.Abort()
-			return
-		}
-		c.Next()
-	}
-
-	func AuthorMiddleWare(c *gin.Context) {
-		role := c.GetHeader("Role")
-		if role != "admin" {
-			c.JSON(http.StatusForbidden, gin.H{
-				"error": "Forbidden",
-			})
-			c.Abort()
-			return
-		}
-		c.Next()
-	}
-*/
-package handlers
-
-import (
-	"fmt"
 	"net/http"
 	"strings"
 
@@ -47,9 +11,7 @@ import (
 var secretKey = []byte("my-secret-key")
 
 func AuthenMiddleWare(c *gin.Context) {
-
 	token := c.GetHeader("Authorization")
-
 	if token == "" {
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"error": "Unauthorized",
@@ -57,13 +19,11 @@ func AuthenMiddleWare(c *gin.Context) {
 		c.Abort()
 		return
 	}
-
 	tokenString := strings.TrimPrefix(token, "Bearer ")
 
 	parsedToken, err := jwt.Parse(tokenString, func(t *jwt.Token) (interface{}, error) {
 		return secretKey, nil
 	})
-
 	if err != nil || !parsedToken.Valid {
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"error": "Invalid token",
@@ -71,7 +31,6 @@ func AuthenMiddleWare(c *gin.Context) {
 		c.Abort()
 		return
 	}
-
 	claims := parsedToken.Claims.(jwt.MapClaims)
 
 	userId := claims["user_id"]
@@ -84,15 +43,15 @@ func AuthenMiddleWare(c *gin.Context) {
 }
 
 func AuthorMiddleWare(c *gin.Context) {
-	fmt.Println("yrdydfgdfgdfgdf")
 	role, exists := c.Get("role")
-
 	if !exists || role != "admin" {
 		c.JSON(http.StatusForbidden, gin.H{
 			"error": "Forbidden",
 		})
+
 		c.Abort()
 		return
+
 	}
 
 	c.Next()
